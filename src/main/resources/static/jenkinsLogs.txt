@@ -1,0 +1,102 @@
+Branch indexing
+ > git rev-parse --resolve-git-dir /var/jenkins_home/caches/git-258bac1c0818408c07c34d24afaef160/.git # timeout=10
+Setting origin to https://github.com/pratiks5/validation-app
+ > git config remote.origin.url https://github.com/pratiks5/validation-app # timeout=10
+Fetching origin...
+Fetching upstream changes from origin
+ > git --version # timeout=10
+ > git --version # 'git version 2.39.5'
+ > git config --get remote.origin.url # timeout=10
+ > git fetch --tags --force --progress -- origin +refs/heads/*:refs/remotes/origin/* # timeout=10
+Seen branch in repository origin/main
+Seen branch in repository origin/master
+Seen 2 remote branches
+Obtained Jenkinsfile from fa8dcedcd3cc90b4e8bece7c2f7e768aee1cd3c8
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/jenkins_home/workspace/validation-app_main
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+Cloning the remote Git repository
+Cloning with configured refspecs honoured and without tags
+Cloning repository https://github.com/pratiks5/validation-app
+ > git init /var/jenkins_home/workspace/validation-app_main # timeout=10
+Fetching upstream changes from https://github.com/pratiks5/validation-app
+ > git --version # timeout=10
+ > git --version # 'git version 2.39.5'
+ > git fetch --no-tags --force --progress -- https://github.com/pratiks5/validation-app +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git config remote.origin.url https://github.com/pratiks5/validation-app # timeout=10
+ > git config --add remote.origin.fetch +refs/heads/*:refs/remotes/origin/* # timeout=10
+Avoid second fetch
+Checking out Revision fa8dcedcd3cc90b4e8bece7c2f7e768aee1cd3c8 (main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f fa8dcedcd3cc90b4e8bece7c2f7e768aee1cd3c8 # timeout=10
+Commit message: "Master (#3)"
+First time build. Skipping changelog.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Checkout)
+[Pipeline] git
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+No credentials specified
+ > git rev-parse --resolve-git-dir /var/jenkins_home/workspace/validation-app_main/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/pratiks5/validation-app.git # timeout=10
+Fetching upstream changes from https://github.com/pratiks5/validation-app.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.39.5'
+ > git fetch --tags --force --progress -- https://github.com/pratiks5/validation-app.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision fa8dcedcd3cc90b4e8bece7c2f7e768aee1cd3c8 (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f fa8dcedcd3cc90b4e8bece7c2f7e768aee1cd3c8 # timeout=10
+ > git branch -a -v --no-abbrev # timeout=10
+ > git checkout -b main fa8dcedcd3cc90b4e8bece7c2f7e768aee1cd3c8 # timeout=10
+Commit message: "Master (#3)"
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Maven Build)
+[Pipeline] sh
++ mvn clean install -DskipTests
+/var/jenkins_home/workspace/validation-app_main@tmp/durable-e5e5a132/script.sh.copy: 1: mvn: not found
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Build Docker Image)
+Stage "Build Docker Image" skipped due to earlier failure(s)
+[Pipeline] getContext
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Push Docker Image)
+Stage "Push Docker Image" skipped due to earlier failure(s)
+[Pipeline] getContext
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Declarative: Post Actions)
+[Pipeline] echo
+Build failed. Please check logs.
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+ERROR: script returned exit code 127
+Finished: FAILURE

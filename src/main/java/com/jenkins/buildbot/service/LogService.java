@@ -1,7 +1,14 @@
 package com.jenkins.buildbot.service;
 
 import org.springframework.core.io.ClassPathResource;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.RestTemplate;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,6 +17,25 @@ import java.io.InputStreamReader;
 
 @Service
 public class LogService {
+
+
+    private final String JENKINS_URL = "http://16.170.163.72:8080";
+    private final String USERNAME = "prats";
+    String API_TOKEN = "4dgdf345tgdfgf";
+
+    public String getBuildLog(String jobName, int buildNumber) {
+        String url = JENKINS_URL + "/job/" + jobName + "/" + buildNumber + "/consoleText";
+
+        RestTemplate restTemplate = new RestTemplate();
+
+        // Basic Auth using Spring helper class
+        HttpHeaders headers = new HttpHeaders();
+        headers.setBasicAuth(USERNAME, API_TOKEN);
+        HttpEntity<String> entity = new HttpEntity<>(headers);
+
+        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, entity, String.class);
+        return response.getBody();
+    }
 
     public String fetchJenkinsLogs(String jobName, int buildNumber) {
         String fileName = "jenkinsLogs.txt";

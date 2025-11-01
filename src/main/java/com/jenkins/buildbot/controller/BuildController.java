@@ -20,9 +20,6 @@ import java.util.List;
 @RequestMapping
 public class BuildController {
 
-
-    private final String JENKINS_URL = "http://16.170.163.72:8080";
-    private final String USERNAME = "prats";
     private final String API_TOKEN = "115cd2114bd1495d69b8802a42c287057d";
 
 
@@ -39,7 +36,7 @@ public class BuildController {
     @GetMapping("/jenkins/analyze-build")
     public ResponseEntity<String> analyzeBuild(@RequestParam String jobName, @RequestParam int buildNumber) {
 
-        String logs = logService.fetchJenkinsLogs(jobName, buildNumber);
+        String logs = logService.getBuildLog(jobName, buildNumber);
         String analysis = chatClient.prompt(logs).call().content();
 
         return ResponseEntity.ok(analysis);
